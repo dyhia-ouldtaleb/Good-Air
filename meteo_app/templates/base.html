@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Good Air{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header>
+  <div class="logo">Good Air</div>
+  <nav>
+    {% if user.is_authenticated %}
+      <span style="margin-right: 1rem;">Bonjour {{ user.username }}</span>
+      <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" style="background:none; border:none; color:#e0e0e0; cursor:pointer;">
+          Se déconnecter
+        </button>
+      </form>
+    {% else %}
+      <a href="{% url 'register' %}">S’inscrire</a>
+      <a href="{% url 'login' %}">Se connecter</a>
+    {% endif %}
+  </nav>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

@@ -1,3 +1,8 @@
+<!-- <h2>Dashboard Statistiques</h2>
+<iframe width="1000" height="600" 
+src=<iframe title="3_1_overview_page" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f&actionBarEnabled=true" frameborder="0" allowFullScreen="true"></iframe>" 
+frameborder="0" allowFullScreen="true"></iframe>
+ -->
 
 
 
@@ -26,8 +31,24 @@
   </style>
 </head>
 <body>
+    {% load static %}
+
     <iframe title="3_1_overview_page" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f" frameborder="0" allowFullScreen="true"></iframe>
 
 </body>
 </html>
 
+<!-- {% load static %}
+{% extends 'base.html' %}
+{% block title %}Accueil - Good Air{% endblock %}
+{% block content %}
+  <h1>Mon Dashboard Power BI</h1>
+  
+  {% if user.is_authenticated %}
+    <a href="{% url 'meteo' %}">Météo</a>
+    <a href="{% url 'stats' %}">Statistiques</a>
+  {% endif %}
+
+  <iframe title="3_1_overview_page" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f" frameborder="0" allowFullScreen="true"></iframe>
+
+{% endblock %} -->
