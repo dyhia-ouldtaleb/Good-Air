@@ -1,32 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Good Air{% endblock %}</title>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'meteo_app/css/style.css' %}">
 </head>
 <body>
+  <header>
+    <a href="{% url 'home' %}">
+      <img src="{% static 'meteo_app/images/logo.png' %}" alt="Good Air Logo">
+    </a>
+    <nav>
+      {% if user.is_authenticated %}
+        <a href="{% url 'meteo' %}">Météo</a>
+        <a href="{% url 'stats' %}">Statistiques</a>
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" style="background:none; border:none; color:#e0e0e0; font-weight:500; cursor:pointer;">Déconnexion</button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}">Se connecter</a>
+        <a href="{% url 'register' %}">S’inscrire</a>
+      {% endif %}
+    </nav>
+  </header>
 
-<header>
-  <div class="logo">Good Air</div>
-  <nav>
-    {% if user.is_authenticated %}
-      <span style="margin-right: 1rem;">Bonjour {{ user.username }}</span>
-      <form action="{% url 'logout' %}" method="post" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit">Se déconnecter</button>
-      </form>
-    {% else %}
-      <a href="{% url 'register' %}">S’inscrire</a>
-      <a href="{% url 'login' %}">Se connecter</a>
-    {% endif %}
-  </nav>
-</header>
-
-<main>
-  {% block content %}{% endblock %}
-</main>
-
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 </body>
 </html>
