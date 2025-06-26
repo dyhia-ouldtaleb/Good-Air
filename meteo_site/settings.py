@@ -27,6 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['good-air.onrender.com']
 
 
@@ -133,3 +134,7 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'home'
 
+# Pour permettre à Django de servir les fichiers statiques en production (Render)
+import os
+if not DEBUG:
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
