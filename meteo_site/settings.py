@@ -27,7 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['good-air.onrender.com']
 
 
 # Application definition
@@ -133,4 +133,3 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'home'
 
-ALLOWED_HOSTS = ['good-air.onrender.com']
