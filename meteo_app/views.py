@@ -33,7 +33,9 @@ def meteo(request):
     data = None
     if request.method == 'POST':
         city = request.POST['city']
-        api_key = "8f991a15ce8eb3b370f488e26b90999a"
+        
+        from decouple import config
+        api_key = config('OPENWEATHER_API_KEY')
         url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric"
         response = requests.get(url)
         data = response.json()
