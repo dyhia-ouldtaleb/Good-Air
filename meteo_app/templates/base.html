@@ -15,9 +15,7 @@
       <span style="margin-right: 1rem;">Bonjour {{ user.username }}</span>
       <form action="{% url 'logout' %}" method="post" style="display:inline;">
         {% csrf_token %}
-        <button type="submit" style="background:none; border:none; color:#e0e0e0; cursor:pointer;">
-          Se déconnecter
-        </button>
+        <button type="submit">Se déconnecter</button>
       </form>
     {% else %}
       <a href="{% url 'register' %}">S’inscrire</a>

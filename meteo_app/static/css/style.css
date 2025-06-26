@@ -11,25 +11,39 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid #2a2a2a;
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: #ffffff;
 }
 
-nav a {
-  margin-left: 1rem;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+nav a,
+nav button {
+  padding: 0.4rem 1rem;
   background-color: #2e2e2e;
   color: #e0e0e0;
+  border: none;
   border-radius: 4px;
-  transition: background 0.3s;
+  text-decoration: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-nav a:hover {
+nav a:hover,
+nav button:hover {
   background-color: #3a3a3a;
+}
+
+nav button {
+  font-family: inherit;
 }
