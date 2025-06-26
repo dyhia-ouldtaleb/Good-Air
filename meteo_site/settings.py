@@ -118,7 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'meteo_app/static']  # ← Pour le développement (ton CSS, etc.)
+STATICFILES_DIRS = [BASE_DIR / 'meteo_app' / 'static']  # ← Pour le développement (ton CSS, etc.)
 STATIC_ROOT = BASE_DIR / 'staticfiles'              # ← Pour la commande `collectstatic` en production
 
 

@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Good Air{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'meteo_app/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
   <header>
     <a href="{% url 'home' %}">
-      <img src="{% static 'meteo_app/images/logo.png' %}" alt="Good Air Logo">
+      <img src="{% static 'images/logo.png' %}" alt="Good Air Logo">
     </a>
     <nav>
       {% if user.is_authenticated %}
