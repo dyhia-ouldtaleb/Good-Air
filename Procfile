@@ -1,0 +1,1 @@
+web: gunicorn meteo_site.wsgi

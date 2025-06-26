@@ -1,0 +1,12 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="city" placeholder="Ville">
+    <button type="submit">Rechercher</button>
+</form>
+
+{% if data %}
+    <h2>Météo pour {{ data.city.name }}</h2>
+    {% for entry in data.list|slice:":5" %}
+        <p>{{ entry.dt_txt }} : {{ entry.main.temp }}°C</p>
+    {% endfor %}
+{% endif %}

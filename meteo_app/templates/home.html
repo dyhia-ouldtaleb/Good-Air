@@ -1,0 +1,18 @@
+<h1>Bienvenue sur le site Météo</h1>
+{% if user.is_authenticated %}
+
+    <p>Bonjour {{ user.username }}</p>
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" style="background:none; border:none; color:blue; text-decoration:underline; cursor:pointer;">
+        Se déconnecter
+    </button>
+    </form>
+
+  ]
+  <a href="{% url 'meteo' %}">Météo</a>
+  <a href="{% url 'stats' %}">Statistiques</a>
+{% else %}
+  <a href="{% url 'login' %}">Se connecter</a>
+  <a href="{% url 'register' %}">S’inscrire</a>
+{% endif %}
