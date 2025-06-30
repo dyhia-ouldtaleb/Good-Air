@@ -29,4 +29,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('meteo/', views.meteo, name='meteo'),
     path('stats/', views.stats, name='stats'),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
 ]
+
+
+LOGIN_REDIRECT_URL = 'meteo'  # nom de la route dans urls.py
+LOGOUT_REDIRECT_URL = 'home'  # ou une autre page

@@ -1,14 +1,17 @@
 
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Accueil - Good Air{% endblock %}
+
 {% block content %}
-  <h1>Bienvenue sur Good Air</h1>
-  <p>Recherchez la météo dans votre ville et accédez à nos statistiques en temps réel.</p>
-  {% if user.is_authenticated %}
-    <a href="{% url 'meteo' %}">Météo</a>
-    <a href="{% url 'stats' %}">Statistiques</a>
-  {% endif %}
+  <div class="home-background"></div>
+  <div class="home-content">
+    <h1>Bienvenue sur Good Air</h1>
+    <p>Découvrez la météo de votre ville en un clic.</p>
+    <a href="{% url 'meteo' %}" class="btn-meteo">Voir la météo</a>
+  </div>
 {% endblock %}
+
 
 <!-- <h1>Bienvenue sur le site Météo</h1>
 {% if user.is_authenticated %}

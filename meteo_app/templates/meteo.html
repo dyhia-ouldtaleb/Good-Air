@@ -1,13 +1,45 @@
 
-<form method="post">
-    {% csrf_token %}
-    <input type="text" name="city" placeholder="Ville">
-    <button type="submit">Rechercher</button>
+
+
+{% extends 'base.html' %}
+{% block title %}Météo - Good Air{% endblock %}
+
+{% block content %}
+
+<div class="meteo-container">
+  <form method="post" class="search-form">
+  {% csrf_token %}
+  <input list="villes" name="city" placeholder="Ville" class="form-input" required>
+  <datalist id="villes">
+    <option value="paris">
+    <option value="marseille">
+    <option value="lyon">
+    <option value="toulouse">
+    <option value="nice">
+    <option value="nantes">
+    <option value="montpellier">
+    <option value="strasbourg">
+    <option value="bordeaux">
+    <option value="lille">
+  </datalist>
+  <button type="submit" class="btn-submit">Rechercher</button>
 </form>
 
-{% if data %}
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == "error" %}
+      <p class="form-error">{{ message }}</p>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+  {% if data %}
     <h2>Météo pour {{ data.city.name }}</h2>
     {% for entry in data.list|slice:":5" %}
-        <p>{{ entry.dt_txt }} : {{ entry.main.temp }}°C</p>
+      <p>{{ entry.dt_txt }} : {{ entry.main.temp }}°C</p>
     {% endfor %}
-{% endif %}
+  {% endif %}
+</div>
+
+
+{% endblock %}

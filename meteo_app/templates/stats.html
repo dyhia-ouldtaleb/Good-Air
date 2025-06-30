@@ -1,56 +1,29 @@
-
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Mon Dashboard Power BI</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    iframe {
-      width: 90vw;
-      height: 90vh;
-      border: none;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
-  </style>
-</head>
-<body>
-    {% load static %}
-
-    <iframe title="3_1_overview_page" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f" frameborder="0" allowFullScreen="true"></iframe>
-
-</body>
-</html>
-
-<!-- 
 {% extends 'base.html' %}
-{% block title %}Accueil - Good Air{% endblock %}
+{% block title %}Statistiques - Good Air{% endblock %}
+
+
+
+
 {% block content %}
-  <h1>Mon Dashboard Power BI</h1>
-  
-  {% if user.is_authenticated %}
-    <a href="{% url 'meteo' %}">Météo</a>
-    <a href="{% url 'stats' %}">Statistiques</a>
-  {% endif %}
 
-  <iframe title="3_1_overview_page" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f" frameborder="0" allowFullScreen="true"></iframe>
+<div class="stats-instruction" style="text-align:center; margin-top: 5rem;">
+    <p>Pour accéder au dashboard Power BI, veuillez cliquer sur le bouton ci-dessous :</p>
+    <a href="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="btn-open-dashboard">
+       Ouvrir le dashboard dans un nouvel onglet
+    </a>
+  </div>
 
-{% endblock %} -->
-
-
-<!-- <h2>Dashboard Statistiques</h2>
-<iframe width="1000" height="600" 
-src=<iframe title="3_1_overview_page" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f&actionBarEnabled=true" frameborder="0" allowFullScreen="true"></iframe>" 
-frameborder="0" allowFullScreen="true"></iframe>
- -->
-
+  <div class="stats-container">
+    <iframe
+      title="Dashboard Power BI"
+      width="100%"
+      src="https://app.powerbi.com/reportEmbed?reportId=80ba683b-bc36-49b2-86b6-db86ee9b80a0&autoAuth=true&ctid=b6e77e52-65f6-4dec-b7d9-8e45f36a536f"
+      frameborder="0"
+      allowfullscreen="true"
+      sandbox="allow-scripts allow-same-origin allow-popups"
+    ></iframe>
+  </div>
+{% endblock %} 

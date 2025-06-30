@@ -27,8 +27,8 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['good-air.onrender.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['good-air.onrender.com']
 
 
 # Application definition
@@ -93,6 +93,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 8}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -128,7 +129,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'              # ← Pour la commande `coll
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # sécurité fallback
+    'meteo_app.backend.EmailOrUsernameBackend',     # ton backend personnalisé
+]
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
@@ -138,3 +142,17 @@ LOGIN_REDIRECT_URL = 'home'
 import os
 if not DEBUG:
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+    
+    
+LOGIN_REDIRECT_URL = '/meteo/'  # chemin vers ta page météo
+
+# configuration pour envoyer les emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'goodair401@gmail.com'          # remplace par ton adresse Gmail
+EMAIL_HOST_PASSWORD = 'faxw mqey efrh gfcb'  # mot de passe d’application (voir étape 2)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+

@@ -1,0 +1,464 @@
+html, body {
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+  background: radial-gradient(circle at top center, #1f1f1f 0%, #121212 100%);
+  color: #e0e0e0;
+}
+
+
+header {
+  background-color: #1f1f1f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Groupe gauche : logo + texte + liens simples */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.greeting {
+  color: #e0e0e0;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  margin-right: 4rem; /* ✅ décalage vers la gauche */
+}
+
+
+header img {
+  height: 40px;
+  margin-left: 2rem; /* ✅ décalage vers la gauche */
+  border-radius: 1px; /* pas d'arrondi */
+
+} 
+
+nav a {
+  margin-left: 1rem;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  font-weight: 500;
+  border-radius: 999px;  /* ✅ style arrondi "pill" */
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #e0e0e0;
+  color: #111111;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* ✅ halo blanc plus intense au hover */
+  cursor: pointer;
+
+}
+
+/* Bouton déconnexion à droite */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Liens texte simples pour Météo et Statistiques */
+.nav-link-text {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1.2rem;      /* même padding que les boutons */
+  border-radius: 999px;        /* arrondis identiques */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link-text:hover {
+  background-color: #e0e0e0;  /* fond clair au hover */
+  color: #111111;             /* texte sombre au hover */
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2); /* ombre plus visible */
+}
+
+.btn-logout {
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #e0e0e0;
+  color: #111111;
+}
+
+/* Groupe droit : greeting + bouton déconnexion */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Boutons se connecter / s'inscrire (quand déconnecté) */
+.nav-button {
+  margin-left: 1rem;
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #e0e0e0;
+  color: #111111;
+}
+
+.auth-buttons a:first-child {
+  margin-right: 1rem;
+}
+
+
+.nav-link-text {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link-text:hover {
+  background-color: #e0e0e0;
+  color: #111111;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-text.active {
+  background-color: #2e2e2e; /* fond bouton actif */
+  
+  color: #e0e0e0;
+  cursor: default;
+  transition: background-color 0.3s ease;
+  pointer-events: none; /* empêche de cliquer sur le bouton actif */
+}
+
+main {
+  padding: 2rem;
+}
+
+.home-background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: url("/static/images/sky_bg.gif") center/cover no-repeat;
+  z-index: -1;
+  opacity: 0.8;
+  filter: brightness(1.2); /* ✅ augmente la luminosité (1.0 = normal) */
+
+}
+.home-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 20vh;
+}
+.home-content h1,
+.home-content p {
+  color: #111; /* texte noir */
+  font-weight: 600;
+}
+
+.home-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.home-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+/* Bouton voir la météo */
+.btn-meteo {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #2e2e2e;      /* gris foncé */
+  color: #e0e0e0;                 /* texte gris clair */
+  border: none;
+  border-radius: 999px; /*  effet pill arrondi extrême */
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+}
+
+.btn-meteo:hover {
+  background-color: #e0e0e0;      /* ✅ fond clair */
+  color: #111111;                 /* ✅ texte noir */
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* ✅ halo blanc plus intense au hover */
+
+}
+
+/****************************************************************************************/
+/*            stylet la page connection                                              */
+.login-container {
+  max-width: 400px;
+  margin: 10vh auto;
+  padding: 2rem;
+  background-color: #1f1f1f;
+  border-radius: 12px;
+  border: 1px solid #333;
+  text-align: center;
+
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #e0e0e0;
+}
+
+.form-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+button[type="submit"],
+nav a {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+button[type="submit"] {
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  padding: 0.6rem 2rem;
+  border: none;
+  border-radius: 999px; /* arrondis extrêmes comme des pastilles */
+  cursor: pointer;
+  transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* léger effet lumineux */
+}
+
+button[type="submit"]:hover {
+  background-color: #e0e0e0;
+  color: #111111;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2); /* un peu plus d’éclat au hover */
+}
+
+.signup-link {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.signup-link a {
+  color: #4da6ff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+
+input[type="text"],
+input[type="password"] {
+  max-width: 100%;
+}
+
+
+/* Erreurs de formulaire */
+.error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.form-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+/************************* style page meteo ***********************/
+.meteo-container {
+  max-width: 70%;
+  height: 60vh;
+  margin: 5vh auto;
+  padding: 2rem;
+  background-color: #1f1f1f;
+  border-radius: 12px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.search-form input.form-input {
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+.btn-submit {
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  padding: 0.6rem 2rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-submit:hover {
+  background-color: #ffffff;
+  color: #111111;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.meteo-container h2 {
+  color: #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.meteo-container p {
+  color: #bbb;
+  margin: 0.3rem 0;
+}
+.meteo-container .form-error {
+  color: #ff6b6b; /* rouge clair */
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+  text-align: left;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/************* style stat ***********************************/
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;       /* hauteur totale du conteneur */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.stats-container iframe {
+  width: auto;
+  height: 45vh;  /* iframe prend toute la hauteur du container */
+  border: none;
+}
+
+.stats-instruction {
+  margin-bottom: 1.5rem;  /* espace entre bouton et iframe */
+  text-align: center;
+}
+
+.stats-instruction p {
+  color: #e0e0e0;          /* blanc cassé, doux sur fond sombre */
+  font-size: 1.1rem;       /* taille un peu plus grande pour confort lecture */
+  margin-bottom: 1.2rem;   /* espace sous le texte */
+  text-align: center;      /* centré */
+  font-weight: 500;        /* légèrement gras */
+  max-width: auto;        /* largeur limitée pour une lecture agréable */
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.4;        /* interligne pour aérer le texte */
+  text-shadow: 0 0 4px rgba(0,0,0,0.6); /* légère ombre portée pour mieux contraster */
+}
+
+
+.btn-open-dashboard {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-open-dashboard:hover {
+  background-color: #e0e0e0;
+  color: #111111;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+}
+.stats-instruction .btn-open-dashboard {
+  margin-bottom: 0; /* pas besoin, on gère par container */
+}
+
+.stats-iframe {
+  flex-grow: 1;         /* prend tout l’espace restant */
+  width: 100%;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
