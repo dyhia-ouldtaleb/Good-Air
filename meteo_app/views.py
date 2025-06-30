@@ -14,6 +14,7 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from . import tokens as tk
 from django.contrib.auth import get_user_model
+from decouple import config
 
 
 
@@ -80,24 +81,34 @@ VALID_CITIES = [
 @login_required
 def meteo(request):
     data = None
+    selected_city = None
+    chart_labels = []
+    chart_temps = []
+
     if request.method == 'POST':
-        
-        
         city = request.POST.get('city', '').lower()
         if city not in VALID_CITIES:
-            # tu peux gérer une erreur ou un message utilisateur ici
-            # par exemple, afficher un message d'erreur
             messages.error(request, "Ville non valide, merci de choisir dans la liste.")
         else:
-            # récupère les données météo normalement
-            from decouple import config
+            selected_city = city
             api_key = config('OPENWEATHER_API_KEY')
             url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric"
             response = requests.get(url)
             data = response.json()
-            
-    return render(request, 'meteo.html', {'data': data,
-        'current_page': 'meteo',})
+
+            # Préparer les données pour Chart.js (5 premiers points)
+            if data and 'list' in data:
+                for entry in data['list'][:5]:
+                    chart_labels.append(entry['dt_txt'])
+                    chart_temps.append(entry['main']['temp'])
+
+    return render(request, 'meteo.html', {
+        'data': data,
+        'valid_cities': VALID_CITIES,
+        'selected_city': selected_city,
+        'chart_labels': chart_labels,
+        'chart_temps': chart_temps,
+    })
 
 @login_required
 def stats(request):

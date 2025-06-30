@@ -1,45 +1,69 @@
-
-
-
 {% extends 'base.html' %}
 {% block title %}Météo - Good Air{% endblock %}
 
 {% block content %}
 
-<div class="meteo-container">
-  <form method="post" class="search-form">
+<form method="post" class="search-form">
   {% csrf_token %}
-  <input list="villes" name="city" placeholder="Ville" class="form-input" required>
-  <datalist id="villes">
-    <option value="paris">
-    <option value="marseille">
-    <option value="lyon">
-    <option value="toulouse">
-    <option value="nice">
-    <option value="nantes">
-    <option value="montpellier">
-    <option value="strasbourg">
-    <option value="bordeaux">
-    <option value="lille">
-  </datalist>
+  <select name="city" class="form-input" required>
+    <option value="" disabled selected>Choisissez une ville</option>
+    {% for city in valid_cities %}
+      <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city|capfirst }}</option>
+    {% endfor %}
+  </select>
   <button type="submit" class="btn-submit">Rechercher</button>
 </form>
 
-{% if messages %}
-  {% for message in messages %}
-    {% if message.tags == "error" %}
-      <p class="form-error">{{ message }}</p>
-    {% endif %}
-  {% endfor %}
+{% if data %}
+  <h2>Météo pour {{ data.city.name|capfirst }}</h2>
+
+  <div class="weather-current">
+    {% with current=data.list.0 %}
+      <img src="http://openweathermap.org/img/wn/{{ current.weather.0.icon }}@4x.png" alt="{{ current.weather.0.description }}">
+      <div class="temp">{{ current.main.temp }}°C</div>
+      <div class="desc">{{ current.weather.0.description|capfirst }}</div>
+    {% endwith %}
+  </div>
+
+  <canvas id="forecastChart" width="400" height="200"></canvas>
 {% endif %}
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
   {% if data %}
-    <h2>Météo pour {{ data.city.name }}</h2>
-    {% for entry in data.list|slice:":5" %}
-      <p>{{ entry.dt_txt }} : {{ entry.main.temp }}°C</p>
-    {% endfor %}
-  {% endif %}
-</div>
+    const ctx = document.getElementById('forecastChart').getContext('2d');
+    const labels = {{ chart_labels|safe }};
+    const temps = {{ chart_temps|safe }};
 
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Température (°C)',
+          data: temps,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+  scales: {
+    x: {
+      ticks: {
+        maxRotation: 30,    // limite la rotation des labels à 30° au lieu de 45 par défaut
+        autoSkip: false,    // ne saute aucun label (affiche tous les jours)
+        maxTicksLimit: 10   // limite le nombre max de ticks (ajuste selon tes besoins)
+      }
+    },
+    y: {
+      beginAtZero: false
+        }
+    }
+  }
+    });
+  {% endif %}
+</script>
 
 {% endblock %}

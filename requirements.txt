@@ -2,3 +2,4 @@ django
 gunicorn
 requests
 python-decouple
+python-dotenv
